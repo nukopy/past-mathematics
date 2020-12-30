@@ -1,0 +1,116 @@
+\documentclass[a4paper,11pt,titlepage,oneside,openany]{jbook}
+% \setlength{\columnsep}{2zw}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% packages
+\usepackage{amsmath}
+\usepackage{fancyhdr}  % pagestyle{fancy}
+\usepackage[top=20truemm,bottom=20truemm,left=20truemm,right=20truemm]{geometry}
+\usepackage[dvipdfmx]{hyperref,graphicx}
+\usepackage{here}
+\usepackage{multicol}  % for multi column
+\usepackage{setspace}
+\usepackage[compact]{titlesec}
+\usepackage{url}
+\usepackage{ulem}
+% for hyperref(cf: https://ossyaritoori.hatenablog.com/entry/2016/11/11/%E3%80%90Tex%E3%80%91%E5%8D%92%E8%AB%96%E4%BF%AE%E8%AB%96%E3%81%AB%E3%81%AF%E6%98%AF%E9%9D%9E%E3%83%8F%E3%82%A4%E3%83%91%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%AF%E6%A9%9F%E8%83%BD%E3%82%92%E3%81%A4)
+\usepackage{pxjahyper}
+\hypersetup{
+	colorlinks=false, % リンクに色をつけない設定
+	bookmarks=true, % 以下ブックマークに関する設定
+	bookmarksnumbered=true,
+	pdfborder={0 0 0},
+	bookmarkstype=toc,
+}
+\newcommand{\linedhref}[2]{\href{#1}{\emph{#2}}}
+
+% for check list
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
+%% pagestyle
+% header: define for header
+\pagestyle{fancy}
+\lhead{}
+% \chead{}
+% \rhead{}
+
+%% other
+% 脚注
+\renewcommand\thefootnote{\arabic{footnote})}
+% フォント：cf) https://texwiki.texjp.org/?%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%B3%AA%E5%95%8F#bf583189
+% fix: “LaTeX Font Warning: Font shape `JY1/mc/m/it' undefined” といった警告が出る
+\DeclareFontShape{JY1}{mc}{m}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{mc}{m}{sl}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{mc}{m}{sc}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{gt}{m}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY1}{gt}{m}{sl}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY1}{mc}{bx}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY1}{mc}{bx}{sl}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT1}{mc}{m}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{mc}{m}{sl}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{mc}{m}{sc}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{gt}{m}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT1}{gt}{m}{sl}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT1}{mc}{bx}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT1}{mc}{bx}{sl}{<->ssub*gt/m/n}{}
+
+% ノーブルの作成
+\makeatletter
+\renewcommand{\chapter}{%
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \global\@topnum\z@
+  \secdef\@chapter\@schapter}
+\makeatother
+
+% chapter などのタイトルの spacing
+% テンプレ：\titlespacing{<command>}{<left>}{<before-sep>}{<after-sep>}[<right>]
+% \titleformat{\chapter}{\Huge\bfseries}{\chaptername\ \thechapter}{0pt}{\vskip 20pt\raggedright}%
+% Alter <after-sep> in the macro below to vary the separation after the \chapter title.
+\titlespacing{\chapter}{0pt}{50pt}{\vspace{-10pt}}{\vspace{-50pt}}
+
+%% title
+\title{統計学メモ}
+\author{@mathnuko}
+\date{2020/02/12 〜}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\tableofcontents
+
+\chapter*{はじめに}
+
+この文書は統計学のポイントをまとめるためのノートである．\footnote{脚注サンプル}
+hoge
+
+% part1 統計学
+\input{parts/part1_statistics.tex}
+
+% part2 数理統計学
+\input{parts/part2_mathematical_statistics.tex}
+
+% part3 生物統計学
+\input{parts/part3_biological_statistics.tex}
+
+% part4 統計学の知識のインデックス
+\input{parts/part4_statistics_index.tex}
+
+% part5 統計検定の情報整理
+\input{parts/part5_statistical_test.tex}
+
+% reference
+\bibliographystyle{jplain}
+\bibliography{reference}
+
+\end{document}
